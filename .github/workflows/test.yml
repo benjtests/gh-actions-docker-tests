@@ -4,6 +4,8 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Print greeting
-        run: echo "Hello world!"
+      - name: Start server
+        run: sudo docker compose up -d --build
+      - name: Run PHPUnit tests
+        run: sudo docker exec -it gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
   
