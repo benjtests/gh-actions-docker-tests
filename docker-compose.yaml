@@ -1,0 +1,37 @@
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    depends_on:
+      - php
+    ports:
+      - "${APP_PORT_HTTP:-80}:80"
+      - "${APP_PORT_HTTPS:-443}:443"
+    environment:
+      - TZ=${TIMEZONE:-Europe/Paris}
+      - APP_NAME=app
+      - APP_HOST=${APP_HOST:-:80}
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./srv:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+      - php_socket:/socket
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ./srv:/srv:delegated
+      - php_socket:/socket
+    environment:
+      - TZ=${TIMEZONE:-Europe/Paris}
+      - APP_HOST=${APP_HOST}
+      - APP_CORS_ALLOW_ORIGIN=${APP_CORS_ALLOW_ORIGIN}
+      - APP_ENV=${APP_ENV:-dev}
+      - APP_DEBUG=${APP_DEBUG:-1}
+
+volumes:
+  php_socket:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,9 @@
+{$APP_HOST}
+
+route {
+	root * /srv/{$APP_NAME}/public
+	push
+	php_fastcgi unix//socket/php-fpm.sock
+	encode zstd gzip
+	file_server
+}
