@@ -10,7 +10,7 @@ jobs:
         run: docker compose up -d --build
       - name: test # test
         run: |
-          chown -R $USER:$USER srv/app/vendor
+          chown -R $USER:$USER srv
       - name: Install composer dependencies
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       - name: Run PHPUnit tests
