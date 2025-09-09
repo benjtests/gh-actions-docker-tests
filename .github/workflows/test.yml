@@ -11,7 +11,7 @@ jobs:
       - name: Fix permissions
         run: |
           mkdir srv/app/vendor
-          chown -R 1000:1000 srv/app/vendor
+          sudo chown -R 1000:1000 srv/app/vendor
       - name: Install composer dependencies
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       # - name: Run PHPUnit tests
