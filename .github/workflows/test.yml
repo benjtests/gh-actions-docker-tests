@@ -7,14 +7,11 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Start server
-        run: sudo docker compose up -d --build
-      # - name: Install composer dependencies
-      #   run: sudo docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
-      # - name: Run PHPUnit tests
-      #   run: sudo docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
-      - name: Check files
-        run: |
-          cd srv/app
-          mkdir vendor
-          ls
-  
+        run: docker compose up -d --build
+      - name: test # test
+        run: mkdir srv/app/vendor
+      - name: Install composer dependencies
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
+      - name: Run PHPUnit tests
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
+ 
