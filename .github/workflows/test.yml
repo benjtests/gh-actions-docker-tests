@@ -15,5 +15,6 @@ jobs:
       - name: Check files
         run: |
           cd srv/app
+          mkdir vendor
           ls
   
