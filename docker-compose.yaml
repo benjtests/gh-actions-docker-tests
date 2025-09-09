@@ -30,7 +30,6 @@ services:
       - APP_CORS_ALLOW_ORIGIN=${APP_CORS_ALLOW_ORIGIN}
       - APP_ENV=${APP_ENV:-dev}
       - APP_DEBUG=${APP_DEBUG:-1}
-      - COMPOSER_ALLOW_SUPERUSER=1
 
 volumes:
   php_socket:
