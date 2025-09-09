@@ -9,7 +9,7 @@ jobs:
       - name: Start server
         run: docker compose up -d --build
       - name: test
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'chmod -R 777 /srv/app'
+        run: docker exec -t --user docker:docker gh-actions-docker-tests-php-1 sh -c 'chmod -R 777 /srv/app'
       # - name: Install composer dependencies
       #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       # - name: Run PHPUnit tests
