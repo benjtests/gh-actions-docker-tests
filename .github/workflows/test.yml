@@ -9,11 +9,9 @@ jobs:
       - name: Start server
         run: docker compose up -d --build
       - name: Fix permissions
-        run: |
-          mkdir srv/app/vendor
-          sudo chown -R 1000:1000 srv/app/vendor
+        run: sudo chown -R 1000:1000 srv
       - name: Install composer dependencies
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install --no-cache'
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       # - name: Run PHPUnit tests
       #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
  
