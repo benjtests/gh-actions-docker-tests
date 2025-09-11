@@ -20,3 +20,5 @@ jobs:
       #   run: echo "Deploy..."
       - name: Print PHP version
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php -v'
+      - name: Print PHP CS Fixer infos
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer show friendsofphp/php-cs-fixer'
