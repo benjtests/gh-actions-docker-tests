@@ -5,5 +5,7 @@ runs:
   steps:
     - name: Start container
       run: docker compose up -d
+      shell: bash
     - name: Set permissions
       run: sudo chown -R 1000:1000 srv
+      shell: bash
