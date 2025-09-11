@@ -1,32 +1,20 @@
 name: Deploy
 on: workflow_dispatch
 jobs:
-  php-coding-standards:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Start Docker container
-        uses: ./.github/actions/docker
-      - name: Download & cache composer dependencies
-        uses: ./.github/actions/cache/composer
+      - name: Start container
+        run: docker compose up -d
+      - name: Set permissions
+        run: sudo chown -R 1000:1000 srv
+      - name: Download Composer dependencies
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       - name: Check PHP coding standards
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
-  php-unit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Start Docker container
-        uses: ./.github/actions/docker
-      - name: Download & cache composer dependencies
-        uses: ./.github/actions/cache/composer
       - name: Run PHPUnit
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
-  deploy:
-    needs: [php-coding-standards, php-unit]
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy
         run: echo "Deploy..."
- 
