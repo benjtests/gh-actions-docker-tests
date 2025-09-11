@@ -1,5 +1,5 @@
-name: Cache composer dependencies
-description: Get Composer dependencies and cache them
+name: Cache docker containers
+description: Build docker containers and cache them
 inputs:
   caching:
     description: Use cache dependencies or not
@@ -8,7 +8,7 @@ inputs:
 outputs:
   used-cache:
     description: Output if cache was used
-    value: ${{ steps.install.outputs.cache }}
+    value: ${{ steps.build.outputs.cache }}
 runs:
   using: composite
   steps:
@@ -17,12 +17,12 @@ runs:
       id: cache
       uses: actions/cache@v4
       with:
-        path: srv/app/vendor
-        key: dependencies-composer-${{ hashFiles('**/composer.lock') }}
-    - name: Install dependencies
-      id: install
+        path: /var/lib/docker/containers
+        key: docker-containers-${{ hashFiles('var/lib/containers') }}
+    - name: Build containers
+      id: build
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
       run: |
-        docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
+        docker compose create
         echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
