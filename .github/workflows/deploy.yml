@@ -1,0 +1,21 @@
+name: Deploy
+on: workflow_dispatch
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Start server
+        run: docker compose up -d --build
+      - name: Set permissions
+        run: sudo chown -R 1000:1000 srv
+      # - name: Install Composer dependencies
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
+      # - name: Check PHP coding standards
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
+      # - name: Test PHP code
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
+      - name: Load & cache composer dependencies
+        uses: ./.github/actions/cache/composer
+ 
