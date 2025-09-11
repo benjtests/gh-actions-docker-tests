@@ -18,7 +18,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: /var/lib/docker/containers
-        key: docker-containers-${{ hashFiles('var/lib/containers') }}
+        key: docker-containers-${{ hashFiles('**/containers') }}
     - name: Build containers
       id: build
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
