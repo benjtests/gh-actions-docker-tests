@@ -1,0 +1,9 @@
+name: Start Docker container
+description: Start Docker container & set permissions
+runs:
+  using: composite
+  steps:
+    - name: Start container
+      run: docker compose up -d
+    - name: Set permissions
+      run: sudo chown -R 1000:1000 srv
