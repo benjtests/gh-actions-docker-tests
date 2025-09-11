@@ -10,8 +10,8 @@ jobs:
         run: docker compose up -d
       - name: Set permissions
         run: sudo chown -R 1000:1000 srv
-      # - name: Download Composer dependencies
-      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
+      - name: Download Composer dependencies
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       # - name: Check PHP coding standards
       #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
       # - name: Run PHPUnit
