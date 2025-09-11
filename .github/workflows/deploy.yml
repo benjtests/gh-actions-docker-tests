@@ -25,6 +25,7 @@ jobs:
       - name: Download & cache composer dependencies
         uses: ./.github/actions/cache/composer
   test-cache:
+    needs: test-job
     runs-on: ubuntu-latest
     steps:
       - name: Get code
