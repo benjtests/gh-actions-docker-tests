@@ -13,8 +13,8 @@ runs:
   using: composite
   steps:
     - name: Cache dependencies
-      if: inputs.caching == 'true'
       id: cache
+      if: inputs.caching == 'true'
       uses: actions/cache@v4
       with:
         path: srv/app/vendor

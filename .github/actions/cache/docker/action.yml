@@ -12,13 +12,13 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Cache dependencies
-      if: inputs.caching == 'true'
+    - name: Cache containers
       id: cache
+      if: inputs.caching == 'true'
       uses: actions/cache@v4
       with:
-        path: /var/lib/docker/overlay2
-        key: docker-containers
+        path: /var/lib/docker
+        key: docker
     - name: Build containers
       id: build
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
