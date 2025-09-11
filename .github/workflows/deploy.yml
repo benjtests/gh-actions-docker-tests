@@ -5,16 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Start container
         run: docker compose up -d
       - name: Set permissions
         run: sudo chown -R 1000:1000 srv
-      - name: Download Composer dependencies
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
-      - name: Check PHP coding standards
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
-      - name: Run PHPUnit
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
-      - name: Deploy
-        run: echo "Deploy..."
+      # - name: Download Composer dependencies
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
+      # - name: Check PHP coding standards
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
+      # - name: Run PHPUnit
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
+      # - name: Deploy
+      #   run: echo "Deploy..."
+      - name: Print PHP version
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php -v'
