@@ -13,7 +13,7 @@ jobs:
       - name: Download Composer dependencies
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
       - name: Check PHP coding standards
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer check --diff src'
       # - name: Run PHPUnit
       #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
       # - name: Deploy
