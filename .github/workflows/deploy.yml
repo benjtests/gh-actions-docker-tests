@@ -12,13 +12,13 @@ jobs:
         run: sudo chown -R 1000:1000 srv
       - name: Download Composer dependencies
         run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer install'
-      # - name: Check PHP coding standards
-      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
+      - name: Check PHP coding standards
+        run: docker exec -t gh-actions-docker-tests-php-1 sh -c './vendor/bin/php-cs-fixer check --diff src'
       # - name: Run PHPUnit
       #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --testdox'
       # - name: Deploy
       #   run: echo "Deploy..."
-      - name: Print PHP version
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php -v'
-      - name: Print PHP CS Fixer infos
-        run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer show friendsofphp/php-cs-fixer'
+      # - name: Print PHP version
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'php -v'
+      # - name: Print PHP CS Fixer infos
+      #   run: docker exec -t gh-actions-docker-tests-php-1 sh -c 'composer show friendsofphp/php-cs-fixer'
