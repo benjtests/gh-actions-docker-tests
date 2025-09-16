@@ -29,3 +29,4 @@ inputs:
             IdentityFile ~/.ssh/deploy.key
             StrictHostKeyChecking no
           END
+        shell: bash
