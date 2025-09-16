@@ -29,12 +29,12 @@ runs:
         KEY: inputs.key
       run: |
         mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/$NAME.key
+        echo "$KEY" > ~/.ssh/$NAME.key
         chmod 600 ~/.ssh/$NAME.key
         cat >>~/.ssh/config <<END
         Host $NAME
-          HostName $SSH_HOST
-          User $SSH_USER
+          HostName $HOST
+          User $USER
           IdentityFile ~/.ssh/$NAME.key
           StrictHostKeyChecking no
         END

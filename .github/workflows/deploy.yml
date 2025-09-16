@@ -32,13 +32,9 @@ jobs:
         uses: ./.github/actions/ssh
         with:
           name: deploy
-          host: $HOST
-          user: $USER
-          key: $KEY
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
-          USER: ${{ secrets.SSH_USER }}
-          KEY: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
       # - name: Output SSH name
       #   run: echo ${{ steps.ssh.outputs.name }}
       - name: Connect to ssh
