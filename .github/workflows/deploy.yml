@@ -1,9 +1,5 @@
 name: Deploy
 on: workflow_dispatch
-env:
-  SSH_HOST: ${{ secrets.SSH_HOST }}
-  SSH_USER: ${{ secrets.SSH_USER }}
-  SSH_KEY: ${{ secrets.SSH_KEY }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -31,5 +27,9 @@ jobs:
             IdentityFile ~/.ssh/deploy.key
             StrictHostKeyChecking no
           END
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Connect to ssh
         run: ssh deploy "sh test.sh"
