@@ -28,5 +28,6 @@ runs:
           User $SSH_USER
           IdentityFile ~/.ssh/deploy.key
           StrictHostKeyChecking no
+          UserKnownHostsFile ~/.ssh/known_hosts
         END
       shell: bash
