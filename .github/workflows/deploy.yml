@@ -37,5 +37,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
       # - name: Output SSH name
       #   run: echo ${{ steps.ssh.outputs.name }}
-      # - name: Connect to ssh
-      #   run: ssh ${{ steps.ssh.outputs.name }} "sh test.sh"
+      - name: Connect to ssh
+        run: ssh ${{ steps.ssh.outputs.name }} "sh test.sh"
