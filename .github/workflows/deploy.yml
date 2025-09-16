@@ -31,14 +31,11 @@ jobs:
         id: ssh 
         uses: ./.github/actions/ssh
         with:
-          host: $HOST
-          user: $USER
-          key: $KEY
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: Output SSH name
-        run: echo ${{ steps.ssh.outputs.name }}
-      # - name: Connect to ssh
-      #   run: ssh deploy "sh test.sh"
+          name: deploy
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+      # - name: Output SSH name
+      #   run: echo ${{ steps.ssh.outputs.name }}
+      - name: Connect to ssh
+        run: ssh ${{ steps.ssh.outputs.name }} "sh test.sh"

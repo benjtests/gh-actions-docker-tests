@@ -20,25 +20,26 @@ outputs:
     value: ${{ steps.output.outputs.name }}
 runs:
   using: composite
+  env:
+    NAME: inputs.name
+    HOST: inputs.host
+    USER: inputs.user
+    KEY: inputs.key
   steps:
     - name: Configure SSH
-      env:
-        HOST: inputs.host
-        USER: inputs.user
-        KEY: inputs.key
       run: |
         mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/deploy.key
-        chmod 600 ~/.ssh/deploy.key
+        echo "$SSH_KEY" > ~/.ssh/$NAME.key
+        chmod 600 ~/.ssh/$NAME.key
         cat >>~/.ssh/config <<END
-        Host deploy
+        Host $NAME
           HostName $SSH_HOST
           User $SSH_USER
-          IdentityFile ~/.ssh/deploy.key
+          IdentityFile ~/.ssh/$NAME.key
           StrictHostKeyChecking no
         END
       shell: bash
     - name: Output SSH name
       id: output
-      run: echo "name='${{ inputs.name }}'" >> $GITHUB_OUTPUT
+      run: echo "name='$NAME'" >> $GITHUB_OUTPUT
       shell: bash
