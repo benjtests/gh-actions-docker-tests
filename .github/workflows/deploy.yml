@@ -38,4 +38,5 @@ jobs:
       # - name: Output SSH name
       #   run: echo ${{ steps.ssh.outputs.name }}
       - name: Connect to ssh
-        run: ssh ${{ steps.ssh.outputs.name }} "sh test.sh"
+        # run: ssh ${{ steps.ssh.outputs.name }} "sh test.sh"
+        run: ssh deploy "sh test.sh"
