@@ -5,19 +5,20 @@ inputs:
     description: SSH name
     required: false
     default: deploy
-  host:
-    description: HostName
-    required: true
-  user:
-    description: Username
-    required: true
-  key:
-    description: Private key
-    required: true
+  # host:
+  #   description: HostName
+  #   required: true
+  # user:
+  #   description: Username
+  #   required: true
+  # key:
+  #   description: Private key
+  #   required: true
 outputs:
   name:
     description: SSH name
-    value: ${{ steps.output.outputs.name }}
+    # value: ${{ steps.output.outputs.name }}
+    value: ${{ inputs.name }}
 runs:
   using: composite
   steps:
@@ -45,11 +46,11 @@ runs:
     #     NAME: inputs.name
     #   run: echo "name='$NAME'" >> $GITHUB_OUTPUT
     #   shell: bash
-    - name: test
-      env:
-        NAME: ${{ inputs.name }}
-        HOST: ${{ inputs.host }}
-        USER: ${{ inputs.user }}
-        KEY: ${{ inputs.key }}
-      run: echo "$NAME"
-      shell: bash
+    # - name: test
+    #   env:
+    #     NAME: inputs.name
+    #     HOST: inputs.host
+    #     USER: inputs.user
+    #     KEY: inputs.key
+    #   run: echo "$NAME"
+    #   shell: bash
