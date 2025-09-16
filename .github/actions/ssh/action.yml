@@ -47,9 +47,9 @@ runs:
     #   shell: bash
     - name: test
       env:
-        NAME: inputs.name
-        HOST: inputs.host
-        USER: inputs.user
-        KEY: inputs.key
+        NAME: ${{ inputs.name }}
+        HOST: ${{ inputs.host }}
+        USER: ${{ inputs.user }}
+        KEY: ${{ inputs.key }}
       run: echo "$NAME"
       shell: bash
