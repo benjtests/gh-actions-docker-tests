@@ -28,6 +28,7 @@ jobs:
       #       StrictHostKeyChecking no
       #     END
       - name: Configure SSH
+        id: ssh 
         uses: ./.github/actions/ssh
         with:
           host: $HOST
@@ -37,5 +38,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Output SSH name
+        run: echo ${{ steps.ssh.outputs.name }}
       # - name: Connect to ssh
       #   run: ssh deploy "sh test.sh"

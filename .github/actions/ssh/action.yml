@@ -14,6 +14,10 @@ inputs:
   key:
     description: Private key
     required: true
+outputs:
+  name:
+    description: SSH name
+    value: ${{ steps.output.outputs.name }}
 runs:
   using: composite
   steps:
@@ -22,16 +26,19 @@ runs:
         HOST: inputs.host
         USER: inputs.user
         KEY: inputs.key
-      # run: |
-      #   mkdir -p ~/.ssh/
-      #   echo "$SSH_KEY" > ~/.ssh/deploy.key
-      #   chmod 600 ~/.ssh/deploy.key
-      #   cat >>~/.ssh/config <<END
-      #   Host deploy
-      #     HostName $SSH_HOST
-      #     User $SSH_USER
-      #     IdentityFile ~/.ssh/deploy.key
-      #     StrictHostKeyChecking no
-      #   END
-      run: echo ${{ inputs.name }}
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/deploy.key
+        chmod 600 ~/.ssh/deploy.key
+        cat >>~/.ssh/config <<END
+        Host deploy
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/deploy.key
+          StrictHostKeyChecking no
+        END
+      shell: bash
+    - name: Output SSH name
+      id: output
+      run: echo "name='${{ inputs.name }}'" >> $GITHUB_OUTPUT
       shell: bash
