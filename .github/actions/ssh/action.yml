@@ -18,15 +18,15 @@ outputs:
   name:
     description: SSH name
     value: ${{ steps.output.outputs.name }}
-env:
-  NAME: inputs.name
-  HOST: inputs.host
-  USER: inputs.user
-  KEY: inputs.key
 runs:
   using: composite
   steps:
     - name: Configure SSH
+      env:
+        NAME: inputs.name
+        HOST: inputs.host
+        USER: inputs.user
+        KEY: inputs.key
       run: |
         mkdir -p ~/.ssh/
         echo "$SSH_KEY" > ~/.ssh/$NAME.key
@@ -41,5 +41,7 @@ runs:
       shell: bash
     - name: Output SSH name
       id: output
+      env:
+        NAME: inputs.name
       run: echo "name='$NAME'" >> $GITHUB_OUTPUT
       shell: bash
