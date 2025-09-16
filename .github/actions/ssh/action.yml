@@ -1,6 +1,10 @@
 name: SSH
 description: Configure SSH
 inputs:
+  name:
+    description: SSH name
+    required: false
+    default: deploy
   host:
     description: HostName
     required: true
@@ -18,16 +22,16 @@ runs:
         HOST: inputs.host
         USER: inputs.user
         KEY: inputs.key
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/deploy.key
-        chmod 600 ~/.ssh/deploy.key
-        cat >>~/.ssh/config <<END
-        Host deploy
-          HostName $SSH_HOST
-          User $SSH_USER
-          IdentityFile ~/.ssh/deploy.key
-          StrictHostKeyChecking no
-          UserKnownHostsFile ~/.ssh/known_hosts
-        END
+      # run: |
+      #   mkdir -p ~/.ssh/
+      #   echo "$SSH_KEY" > ~/.ssh/deploy.key
+      #   chmod 600 ~/.ssh/deploy.key
+      #   cat >>~/.ssh/config <<END
+      #   Host deploy
+      #     HostName $SSH_HOST
+      #     User $SSH_USER
+      #     IdentityFile ~/.ssh/deploy.key
+      #     StrictHostKeyChecking no
+      #   END
+      run: echo ${{ inputs.name }}
       shell: bash
