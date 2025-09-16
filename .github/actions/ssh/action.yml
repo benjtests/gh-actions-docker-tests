@@ -24,19 +24,22 @@ runs:
     - name: Configure SSH
       env:
         NAME: inputs.name
+        TEST: ${{ inputs.name }}
         HOST: inputs.host
         USER: inputs.user
         KEY: inputs.key
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$KEY" > ~/.ssh/$NAME.key
-        chmod 600 ~/.ssh/$NAME.key
-        cat >>~/.ssh/config <<END
-        Host $NAME
-          HostName $HOST
-          User $USER
-          IdentityFile ~/.ssh/$NAME.key
-          StrictHostKeyChecking no
-        END
-        echo "name='$NAME'" >> $GITHUB_OUTPUT
+      # run: |
+      #   mkdir -p ~/.ssh/
+      #   echo "$KEY" > ~/.ssh/$NAME.key
+      #   chmod 600 ~/.ssh/$NAME.key
+      #   cat >>~/.ssh/config <<END
+      #   Host $NAME
+      #     HostName $HOST
+      #     User $USER
+      #     IdentityFile ~/.ssh/$NAME.key
+      #     StrictHostKeyChecking no
+      #   END
+      #   echo "name='$NAME'" >> $GITHUB_OUTPUT
+      run: echo name=$NAME test=$TEST
+      run: echo "name='$NAME'" >> $GITHUB_OUTPUT
       shell: bash
