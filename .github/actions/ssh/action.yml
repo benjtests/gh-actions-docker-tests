@@ -18,13 +18,13 @@ outputs:
   name:
     description: SSH name
     value: ${{ steps.output.outputs.name }}
+env:
+  NAME: inputs.name
+  HOST: inputs.host
+  USER: inputs.user
+  KEY: inputs.key
 runs:
   using: composite
-  env:
-    NAME: inputs.name
-    HOST: inputs.host
-    USER: inputs.user
-    KEY: inputs.key
   steps:
     - name: Configure SSH
       run: |
