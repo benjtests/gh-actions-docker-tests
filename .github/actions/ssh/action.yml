@@ -50,6 +50,6 @@ runs:
     #     NAME: inputs.name
     #   run: echo "name='$NAME'" >> $GITHUB_OUTPUT
     #   shell: bash
-    name: test
-    run: echo $NAME
-    shell: bash
+    - name: test
+      run: echo $NAME
+      shell: bash
