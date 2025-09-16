@@ -5,52 +5,38 @@ inputs:
     description: SSH name
     required: false
     default: deploy
-  # host:
-  #   description: HostName
-  #   required: true
-  # user:
-  #   description: Username
-  #   required: true
-  # key:
-  #   description: Private key
-  #   required: true
+  host:
+    description: HostName
+    required: true
+  user:
+    description: Username
+    required: true
+  key:
+    description: Private key
+    required: true
 outputs:
   name:
     description: SSH name
-    # value: ${{ steps.output.outputs.name }}
-    value: ${{ inputs.name }}
+    value: ${{ steps.output.outputs.name }}
 runs:
   using: composite
   steps:
-    # - name: Configure SSH
-    #   env:
-    #     NAME: inputs.name
-    #     HOST: inputs.host
-    #     USER: inputs.user
-    #     KEY: inputs.key
-    #   run: |
-    #     mkdir -p ~/.ssh/
-    #     echo "$SSH_KEY" > ~/.ssh/$NAME.key
-    #     chmod 600 ~/.ssh/$NAME.key
-    #     cat >>~/.ssh/config <<END
-    #     Host $NAME
-    #       HostName $SSH_HOST
-    #       User $SSH_USER
-    #       IdentityFile ~/.ssh/$NAME.key
-    #       StrictHostKeyChecking no
-    #     END
-    #   shell: bash
-    # - name: Output SSH name
-    #   id: output
-    #   env:
-    #     NAME: inputs.name
-    #   run: echo "name='$NAME'" >> $GITHUB_OUTPUT
-    #   shell: bash
-    # - name: test
-    #   env:
-    #     NAME: inputs.name
-    #     HOST: inputs.host
-    #     USER: inputs.user
-    #     KEY: inputs.key
-    #   run: echo "$NAME"
-    #   shell: bash
+    - name: Configure SSH
+      env:
+        NAME: inputs.name
+        HOST: inputs.host
+        USER: inputs.user
+        KEY: inputs.key
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/$NAME.key
+        chmod 600 ~/.ssh/$NAME.key
+        cat >>~/.ssh/config <<END
+        Host $NAME
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/$NAME.key
+          StrictHostKeyChecking no
+        END
+        echo "name='$NAME'" >> $GITHUB_OUTPUT
+      shell: bash
