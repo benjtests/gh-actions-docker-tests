@@ -39,6 +39,7 @@ runs:
       #     StrictHostKeyChecking no
       #   END
       #   echo "name='$NAME'" >> $GITHUB_OUTPUT
-      run: echo name=$NAME
-      run: echo "name='$NAME'" >> $GITHUB_OUTPUT
+      run: | 
+        echo name=$NAME
+        echo "name='$NAME'" >> $GITHUB_OUTPUT
       shell: bash
