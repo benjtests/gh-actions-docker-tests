@@ -24,7 +24,6 @@ runs:
     - name: Configure SSH
       env:
         NAME: inputs.name
-        TEST: ${{ inputs.name }}
         HOST: inputs.host
         USER: inputs.user
         KEY: inputs.key
@@ -40,6 +39,6 @@ runs:
       #     StrictHostKeyChecking no
       #   END
       #   echo "name='$NAME'" >> $GITHUB_OUTPUT
-      run: echo name=$NAME test=$TEST
+      run: echo name=$NAME
       run: echo "name='$NAME'" >> $GITHUB_OUTPUT
       shell: bash
