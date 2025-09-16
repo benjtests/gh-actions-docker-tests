@@ -26,5 +26,5 @@ sudo docker exec -it gh-actions-docker-tests-php-1 sh -c 'php bin/phpunit --test
 
 ### fix /srv folder permission denied
 ```
-sudo chown -R user:group srv
+sudo chown -R $USER:$USER srv
 ```
