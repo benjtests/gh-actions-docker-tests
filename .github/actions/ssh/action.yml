@@ -4,7 +4,7 @@ inputs:
   identity:
     description: Identity
     required: false
-    default: deploy
+    default: external
   host:
     description: Host name
     required: true
