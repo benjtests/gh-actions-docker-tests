@@ -40,4 +40,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
       - name: Connect to SSH
         # run: ssh deploy "sh test.sh"
-        run: ssh ${{ ssh-config.outputs.identity }} "sh test.sh"
+        run: ssh ${{ steps.ssh-config.outputs.identity }} "sh test.sh"
