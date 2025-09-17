@@ -35,9 +35,10 @@ jobs:
         id: ssh-config
         uses: ./.github/actions/ssh
         with:
+          identity: prod
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
       - name: Connect to SSH
         # run: ssh deploy "sh test.sh"
-        run: ssh ${{ steps.ssh-config.outputs.identity }} "sh test.sh"
+        run: ssh prod "sh test.sh"

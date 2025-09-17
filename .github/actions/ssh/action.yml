@@ -47,5 +47,3 @@ runs:
         END
         echo "identity='$IDENTITY'" >> $GITHUB_OUTPUT
       shell: bash
-    # - name: Output SSH name
-      # run: echo "name='$NAME'" >> $GITHUB_OUTPUT
