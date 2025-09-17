@@ -32,10 +32,12 @@ jobs:
       #     SSH_USER: ${{ secrets.SSH_USER }}
       #     SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Configure SSH
+        id: ssh-config
         uses: ./.github/actions/ssh
         with:
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
       - name: Connect to SSH
-        run: ssh deploy "sh test.sh"
+        # run: ssh deploy "sh test.sh"
+        run: ssh ${{ ssh-config.outputs.identity }} "sh test.sh"
