@@ -1,10 +1,10 @@
 name: SSH
 description: Configure SSH
 inputs:
-  name:
-    description: SSH name
-    required: false
-    default: deploy
+  # name:
+  #   description: SSH name
+  #   required: false
+  #   default: deploy
   host:
     description: HostName
     required: true
@@ -14,29 +14,29 @@ inputs:
   key:
     description: Private key
     required: true
-outputs:
-  name:
-    description: SSH name
-    value: ${{ steps.output.outputs.name }}
+# outputs:
+#   name:
+#     description: SSH name
+#     value: ${{ steps.output.outputs.name }}
 runs:
   using: composite
   steps:
     - name: Configure SSH
       env:
-        NAME: ${{ inputs.name }}
         HOST: ${{ inputs.host }}
         USER: ${{ inputs.user }}
         KEY: ${{ inputs.key }}
       run: |
         mkdir -p ~/.ssh/
-        echo "$KEY" > ~/.ssh/$NAME.key
-        chmod 600 ~/.ssh/$NAME.key
-        cat >>~/.ssh/config <<END
-        Host $NAME
-          HostName $HOST
-          User $USER
-          IdentityFile ~/.ssh/$NAME.key
-          StrictHostKeyChecking no
-        END
-        echo "name='$NAME'" >> $GITHUB_OUTPUT
+          echo "$KEY" > ~/.ssh/deploy.key
+          chmod 600 ~/.ssh/deploy.key
+          cat >>~/.ssh/config <<END
+          Host deploy
+            HostName $HOST
+            User $USER
+            IdentityFile ~/.ssh/deploy.key
+            StrictHostKeyChecking no
+          END
       shell: bash
+    # - name: Output SSH name
+      # run: echo "name='$NAME'" >> $GITHUB_OUTPUT
