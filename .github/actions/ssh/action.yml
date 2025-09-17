@@ -19,7 +19,7 @@ inputs:
     required: false
     default: 22
 outputs:
-  name:
+  identity:
     description: Identity
     value: ${{ steps.config.outputs.identity }}
 runs:
